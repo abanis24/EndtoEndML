@@ -33,7 +33,7 @@ def evaluate_model(x_train,y_train,x_test,y_test,models):
             test_model_score = r2_score(y_test,y_test_pred)
 
             report[list(models.keys())[i]] = test_model_score
-
+        # print(report)
         return report
     except Exception as e:
         raise custom_exception(e,sys)

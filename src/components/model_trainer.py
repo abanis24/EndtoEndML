@@ -40,8 +40,8 @@ class ModelTrainer:
             )
 
             models={
-                "Linear Regression":LinearRegression(),
-                "DecisionTree Regression":DecisionTreeRegressor(),
+                "Linear Regressor":LinearRegression(),
+                "DecisionTree Regressor":DecisionTreeRegressor(),
                 "K-Neighbors Regressor":KNeighborsRegressor(),
                 "Randomforest Regressor":RandomForestRegressor(),
                 "Adaboost Regressor":AdaBoostRegressor(),
@@ -51,14 +51,17 @@ class ModelTrainer:
             }
 
             model_report:dict=evaluate_model(x_train,y_train,x_test,y_test,models)
+            # print("Model trained")
 
             best_model_score = max(sorted(model_report.values()))
+            # print("got the best model score")
 
             best_model_name = list(model_report.keys())[list(model_report.values()).index(best_model_score)]
 
             best_model = models[best_model_name]
+            print(f"best model name:{best_model}")
             if best_model_score<0.6:
-                raise custom_exception("There is no best mmodel")
+                raise custom_exception("There is no best model")
         
 
             save_object(
@@ -66,7 +69,7 @@ class ModelTrainer:
                 obj=best_model 
             )
 
-            predicted = best_model(x_test)
+            predicted = best_model.predict(x_test)
 
             r2_square = r2_score(y_test,y_pred=predicted)
             return r2_score
