@@ -1,2 +1,2 @@
 # EndtoEndML
-Gonna complete it 
+completed it just need to deploy it in cloud
